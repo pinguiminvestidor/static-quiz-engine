@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="Content-Type" value="text/html; charset=utf-8" />
+        <title>{{ My Quiz }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header>
+            <h1>{{ My Quiz }}</h1>
+        </header>
+        <section id="q1">
+            <p class="question">
+                What is Napoleon's birth country?
+            </p>
+            <form class="answer">
+                <input type="radio" id="q1_a1" name="q1" value="0" />
+                <label for="q1_a1">France</label><br />
+                <input type="radio" id="q1_a2" name="q1" value="1" />
+                <label for="q1_a2">Italy</label><br />
+                <input type="radio" id="q1_a3" name="q1" value="0" />
+                <label for="q1_a3">Russia</label><br />
+                <input type="radio" id="q1_a4" name="q1" value="1" />
+                <label for="q1_a4">Mexico</label><br />
+                <input type="radio" id="q1_a5" name="q1" value="0" />
+                <label for="q1_a5">Germany</label><br />
+            </form>
+        </section>
+        <section id="q2">
+            <p class="question">
+                How long did the 100-years' war last?
+            </p>
+            <form class="answer">
+                <input type="radio" id="q2_a1" name="q2" value="0" />
+                <label for="q2_a1">56</label><br />
+                <input type="radio" id="q2_a2" name="q2" value="0" />
+                <label for="q2_a2">100</label><br />
+                <input type="radio" id="q2_a3" name="q2" value="1" />
+                <label for="q2_a3">116</label><br />
+                <input type="radio" id="q2_a4" name="q2" value="0" />
+                <label for="q2_a4">321,23</label><br />
+                <input type="radio" id="q2_a5" name="q2" value="0" />
+                <label for="q2_a5">Ten</label><br />
+            </form>
+        </section>
+        <section id="q3">
+            <p class="question">
+                Where was the Panama Hat created?
+            </p>
+            <form class="answer">
+                <input type="radio" id="q3_a1" name="q3" value="0" />
+                <label for="q3_a1">Guatemala</label><br />
+                <input type="radio" id="q3_a2" name="q3" value="0" />
+                <label for="q3_a2">Morocco</label><br />
+                <input type="radio" id="q3_a3" name="q3" value="0" />
+                <label for="q3_a3">Panama</label><br />
+                <input type="radio" id="q3_a4" name="q3" value="1" />
+                <label for="q3_a4">Ecuador</label><br />
+                <input type="radio" id="q3_a5" name="q3" value="0" />
+                <label for="q3_a5">Mexico</label><br />
+            </form>
+        </section>
+        <section id="results">
+            <p>
+                Your score is: <span id="testscore"></span>
+            </p>
+        </section>
+        <footer>
+            <p id="debug"></p>
+            <p>
+                <button id="calc">Calculate!</button>
+            </p>
+            <p>
+                Copyright 2020 - <a href="https://pinguiminvestidor.com">Pinguim Investidor</a>. All rights reserved.
+            </p>
+        </footer>
+        <noscript>
+            Please enable Javascript to use this app. 
+            There's no tracking scripts here, just client-side logic.
+        </noscript>
+        <script type="text/javascript" src="quiz.js">
+            // see quiz.js for explanation on how to use this.
+        </script>
+    </body>
+</html>
