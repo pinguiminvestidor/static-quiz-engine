@@ -13,7 +13,7 @@
 */
 
 // Comment the anonymous function wrapper in order to debug via web console.
-(function () {
+//(function () {
 'use strict';
 
 // Elements detection
@@ -22,13 +22,16 @@ var questions = document.querySelectorAll("form.answer");
 var pages = document.querySelectorAll("body > section");
 var radiobuttons = document.querySelectorAll("form input[type=radio]");
 var nextbuttons = document.querySelectorAll("button.next");
+var explanation = document.querySelectorAll("#scoreexplanation")[0];
 
 // This counter will let us know what is the current "page" we're in:
 var currentpage = 0;
 
 // Clear choices, just in case.
-for (let i = 0; i < radiobuttons.length; i++) {
-    radiobuttons[i].checked = false;
+function clearChoices() {
+    for (let i = 0; i < radiobuttons.length; i++) {
+        radiobuttons[i].checked = false;
+    }
 }
 
 // Hide all sections except for the beginning
@@ -39,23 +42,52 @@ function hideAll() {
     pages[currentpage].style = "display: block";
 }
 
-// Advance to the next page by clicking the button. Sorry, no "going back"
+// Advance to the next page by clicking the button. 
 function next() {
     pages[currentpage].style = "display: none";
     pages[currentpage + 1].style = "display: block";
     currentpage += 1;
+    if (currentpage == pages.length -1) {
+        // we're in the last page, so must calculate the score.
+        calculate();
+    }
+}
+
+// Reset the quiz without having to F5 it.
+function reset() {
+    currentpage = 0;
+    clearChoices();
+    explanation.innerHTML = "";
+    hideAll();
 }
 
 // Evaluation of score. Change this according to your rules:
 function evaluateScore(score) {
     if (score == 3) {
-        return "Perfect";
+        return "perfect";
     }
     else if (score > 1) {
-        return "Passable";
+        return "passable";
     }
     else {
-        return "Insufficient";
+        return "insufficient";
+    }
+}
+
+// Load results asynchronously via AJAX:
+function loadExplanation(url) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.send();
+    // listen to changes:
+    xhr.onload = function() {
+        if (xhr.status == 200) {
+            explanation.innerHTML = xhr.responseText;
+        }
+        else {
+            explanation.innerHTML = "<p>Error loading results.</p>";
+            console.log(xhr.responseText);
+        }
     }
 }
 
@@ -77,15 +109,17 @@ function calculate() {
     }
 
     scoremeter.innerHTML = total_score + "/" + questions.length + " which is " + evaluateScore(total_score);
+    loadExplanation("sample.html");
 }
 
-var calc = document.querySelectorAll("button#calc")[0];
-calc.onclick = calculate;
+var rst = document.querySelectorAll("button.reset")[0];
+rst.onclick = reset;
 
 for (let a = 0; a < nextbuttons.length; a++) {
     nextbuttons[a].onclick = next;
 }
 
 hideAll();
+clearChoices();
 
-})();
+//})();
